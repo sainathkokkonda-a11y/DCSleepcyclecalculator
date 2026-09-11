@@ -1,0 +1,85 @@
+<div class="sleep-card">
+  <div class="sleep-header">
+    <h2>Advanced Sleep Cycle Calculator</h2>
+    <p>Calculate optimal sleep cycles with automatic time detection and manual controls.</p>
+  </div>
+
+  <div class="sleep-body">
+    <!-- Target User Selection -->
+    <div class="input-block">
+      <label class="blue-label">Who is this for?</label>
+      <div class="toggle-group">
+        <button type="button" class="btn-toggle active" id="typeAdult" onclick="setUserType('adult')">Adult (18+ yrs)</button>
+        <button type="button" class="btn-toggle" id="typeKid" onclick="setUserType('kid')">Kid / Toddler</button>
+      </div>
+    </div>
+
+    <!-- Calculation Mode -->
+    <div class="input-block">
+      <label class="blue-label">Calculation Mode:</label>
+      <div class="toggle-group">
+        <button type="button" class="btn-toggle active" id="modeWake" onclick="setCalcMode('wake')">Find Bedtime</button>
+        <button type="button" class="btn-toggle" id="modeBed" onclick="setCalcMode('bed')">Find Wake Time</button>
+        <button type="button" class="btn-toggle" id="modeManual" onclick="setCalcMode('manual')">Manual Analysis</button>
+      </div>
+    </div>
+
+    <!-- Time Inputs with Auto-Fetch -->
+    <div id="wakeTimeSection" class="input-block">
+      <div class="label-row">
+        <label class="blue-label" id="timeSectionLabel">Target Wake Up Time:</label>
+        <button type="button" class="auto-time-btn" onclick="fetchCurrentTime('wake')">⚡ Use Current Time</button>
+      </div>
+      <div class="time-select-group">
+        <select id="wakeHour" class="blue-input"></select>
+        <select id="wakeMinute" class="blue-input"></select>
+        <select id="wakeAmpm" class="blue-input">
+          <option value="AM">AM</option>
+          <option value="PM">PM</option>
+        </select>
+      </div>
+    </div>
+
+    <div id="bedTimeSection" class="input-block" style="display: none;">
+      <div class="label-row">
+        <label class="blue-label">Target Bed Time:</label>
+        <button type="button" class="auto-time-btn" onclick="fetchCurrentTime('bed')">⚡ Use Current Time</button>
+      </div>
+      <div class="time-select-group">
+        <select id="bedHour" class="blue-input"></select>
+        <select id="bedMinute" class="blue-input"></select>
+        <select id="bedAmpm" class="blue-input">
+          <option value="AM">AM</option>
+          <option value="PM">PM</option>
+        </select>
+      </div>
+    </div>
+
+    <!-- Manual Advanced Settings Link -->
+    <div class="manual-toggle-link" onclick="toggleManualSettings()">
+      ⚙️ <span id="manualToggleText">Show Custom Cycle Settings</span>
+    </div>
+
+    <div id="manualSettingsBlock" class="manual-block" style="display: none;">
+      <div class="input-block">
+        <label class="blue-label">Sleep Cycle Duration (Minutes):</label>
+        <input type="number" id="customCycleMin" class="blue-input" value="90" min="30" max="120">
+      </div>
+      <div class="input-block">
+        <label class="blue-label">Time to Fall Asleep (Minutes):</label>
+        <input type="number" id="customFallAsleep" class="blue-input" value="14" min="0" max="60">
+      </div>
+    </div>
+
+    <button type="button" class="blue-calc-btn" onclick="calculateSleep()">Calculate Sleep</button>
+
+    <!-- Results Display -->
+    <div id="sleepResultBox" class="result-container" style="display: none;">
+      <h3 class="blue-subheading" id="resTitle">Suggested Times</h3>
+      <p class="info-text" id="resSubInfo"></p>
+      
+      <div id="advTimeList" class="suggestions-list"></div>
+      <div id="manualSummaryBox" class="manual-summary" style="display: none;"></div>
+    </div>
+  </div>
+</div>
